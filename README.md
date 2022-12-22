@@ -2,9 +2,9 @@
 pip install -r  requiremet.txt
 
 #  download model and dataset
-git lfs install
-git clone https://huggingface.co/sarakolding/mt5-da-small
-git clone https://huggingface.co/Datasets/Amba/mt5-small-finetuned-amazon-en-es_books_dataset
+  git lfs installCancel changes
+  git clone https://huggingface.co/sarakolding/mt5-da-small
+  git clone https://huggingface.co/Datasets/Amba/mt5-small-finetuned-amazon-en-es_books_dataset
 
 
 #  Run code
