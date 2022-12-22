@@ -1,0 +1,34 @@
+
+
+mt5_small: &mt5_small
+  # Execution
+  random_seed: 42
+  dataloader_workers: 32
+  async_dataloader: True
+  ipus_per_replica: 4
+  executable_cache_dir: "./exe_cache"
+  enable_half_partials: True
+  matmul_proportion: [0.2, 0.1, 0.2, 0.2]
+  wandb: False
+  checkpoint_save_steps: 500
+  epochs: 32
+  device_iterations: 1
+  replication_factor: 1
+  gradient_accumulation: 15
+
+  # Optimizer
+  optimizer: AdamW
+  beta1: 0.9
+  beta2: 0.98
+  eps: 1e-6
+  weight_decay: 0.2
+  warmup_epochs: 5
+  lr_schedule: cosine
+  learning_rate: 1.1e-3
+  loss_scaling: 1024.0
+  restore: False
+  state_onchip: True
+
+  # Checkpoint
+  checkpoint_file: ""
+  checkpoint_dir: "output/ckpt"
