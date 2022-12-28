@@ -1,5 +1,5 @@
 #  install Dependencies
-pip install -r  requiremet.txt
+pip install -r  requirements.txt
 
 #  download model and dataset
   git lfs installCancel changes
