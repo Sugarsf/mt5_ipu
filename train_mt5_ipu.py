@@ -1,43 +1,21 @@
 from transformers import MT5ForConditionalGeneration, MT5Tokenizer
 from datasets import load_dataset
 import torch
-from torch.utils.data import DataLoader,Dataset
 import poptorch
 from log import Logger
 import datetime
 from ipu_options  import get_options
-from data_loader import MyDataloader,collate_fn
+from data_loader import MyDataloader, collate_fn
 from args import parse_args
 from optimization import get_lr_scheduler, get_optimizer
 import os
 import time
+from mt5_model_ipu import ipu_mt5, mT5
 
 tokenizer = MT5Tokenizer.from_pretrained('mt5-da-small')
 batch_size = 1
 
-
-class mT5(torch.nn.Module):
-    '''
-    A basic mT5 model 
-    '''
-    def __init__(self,log):
-        super(mT5, self).__init__()
-        self.mt5 = MT5ForConditionalGeneration.from_pretrained('mt5-da-small').parallelize_ipu4(log)
-        # new_embeddings = torch.nn.Embedding(32128,512)
-        # self.mt5.encoder.set_input_embeddings(new_embeddings)
-        #self.mt5.encoder.embed_tokens.load_state_dict(model_embedding.encoder.embed_tokens.state_dict())
-        
-    def forward(self, input_ids, labels):
-        out = self.mt5(input_ids=input_ids, labels=labels)
-        
-        return out
-    
-    def generate(self, input_ids):
-        result = self.mt5.generate(input_ids=input_ids)
-        
-        return result
-
-if __name__ =='__main__': 
+if __name__ == "__main__":
     
     config = parse_args()
 
